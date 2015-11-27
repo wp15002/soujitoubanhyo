@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>くじ</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	body{
+	text-align: center;
+	}
+	h1{
+		margin: 10px;
+	}
+	button{
+		height: 30px;
+		width: 100px;
+		font-size: 20px;
+	}
+	table{
+		margin: 20px auto;
+		border-spacing: 0;
+	}
+	table th{
+		width: 100px;
+	}
+	table td{
+		height: 25px;
+		width: 300px;
+	}
+	span{
+		font-weight: bold;
+	}
+	tr:nth-child(-n+3){
+		background: rgb(240,200,150);
+	}
+
+	tr:nth-child(n+4):nth-child(-n+7){
+		background: rgb(255,150,150);
+	}
+	tr:nth-child(n+8):nth-child(-n+11){
+		background: rgb(150,250,255);
+	}
+	tr:nth-child(n+12):nth-child(-n+15){
+		background: rgb(150,255,150);
+	}
+	tr:nth-child(n+16):nth-child(-n+19){
+		background: rgb(255,255,150);
+	}
+	</style>
+	<script type="text/javascript">
+
+	var days=new Array(5);
+	days[0]="月曜日";
+	days[1]="火曜日";
+	days[2]="水曜日";
+	days[3]="木曜日";
+	days[4]="金曜日";
+
+
+	var member=new Array(19);
+	member[0]="古井　志保子";
+	member[1]="前原　裕幸";
+	member[2]="瑞慶山　君子";
+	member[3]="久銘次　あかね";
+	member[4]="岡田　安民";
+	member[5]="石郷岡　寛";
+	member[6]="蔵元　由紀";
+	member[7]="奥間　朝文";
+	member[8]="菊池　義之";
+	member[9]="齋藤　勇治";
+	member[10]="堀川　あきえ";
+	member[11]="神山　裕康";
+	member[12]="知念　琴絵";
+	member[13]="比嘉　将太";
+	member[14]="畠中　亜由美";
+	member[15]="赤嶺　哲平";
+	member[16]="阿嘉　純也";
+	member[17]="崎原　純";
+	member[18]="東江　美和";
+
+	var memory=new Array();
+
+	var tdArray=new Array();
+	for(var q=0; q<=18; q++){
+		tdArray[q]=q;
+	}
+	
+
+	var tdmemory=new Array();
+
+	var k=0;
+	var num;
+	var tdNum;
+	$(function(){
+		$("button").click(function(){
+			var randNum=Math.floor(Math.random()*member.length);
+			memory[num]=member[randNum];
+			member.splice(randNum,1);
+
+			var tdrand=Math.floor(Math.random()*tdArray.length);
+			tdmemory[tdNum]=tdArray[tdrand];
+			tdArray.splice(tdrand,1);
+
+
+			$("td").eq(tdmemory[tdNum]).append('<span>'+memory[num]+'</span>');
+
+			k++;
+			if(k==19){
+				$("h1").text("掃除当番表　完成！");
+				$("button").off("click");
+			}
+		});
+
+	})
+
+	</script>
+</head>
+<body>
+	
+	<div id="myArea">
+		<h1>何曜日かな？(Click！)</h1>
+	</div>
+	<button>Click!</button>
+	<script type="text/javascript">
+	document.write("<table border='1'>");
+
+	for(var j=0; j<=4; j++){
+		if(j==0){
+			document.write("<tr><th rowspan='3'>",days[j],"</th>");
+		}else{
+			document.write("<tr><th rowspan='4'>",days[j],"</th>");
+		}
+		if(j==0){
+			for(var i=0; i<=2; i++){
+				document.write("<td></td></tr>");
+			}
+	    }else {
+	    	for(var i=0; i<=3; i++){
+				document.write("<td></td></tr>");
+			}
+		}
+	}
+
+	document.write("</table>");
+	</script>
+</body>
+</html>
